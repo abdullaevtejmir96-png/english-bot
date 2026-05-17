@@ -104,6 +104,20 @@ LISTENING_TIPS = [
     "🎧 *FCE Listening — 4 части*\n\n• *Part 1:* 8 диалогов — MCQ\n• *Part 2:* Монолог — заполни пропуски\n• *Part 3:* 5 говорящих — сопоставь\n• *Part 4:* Интервью — MCQ\n\n💡 Part 2: Пиши то что слышишь!\n💡 Part 3: Сначала слушай о чём говорит каждый.",
 ]
 
+LESSONS = {
+    "grammar": GRAMMAR_RULES,
+    "vocab": VOCAB_RULES,
+    "reading": READING_LESSONS,
+    "writing": WRITING_LESSONS,
+}
+
+IDX_KEYS = {
+    "grammar": "grammar_idx",
+    "vocab": "vocab_idx",
+    "reading": "reading_idx",
+    "writing": "writing_idx",
+}
+
 user_store = {}
 
 def init_user(user_id):
@@ -186,7 +200,6 @@ async def send_question(query, user_id):
 
     q = questions[q_idx]
     store["q_index"] += 1
-
     options = q["options"][:]
     random.shuffle(options)
 
@@ -200,18 +213,6 @@ async def send_question(query, user_id):
         [[InlineKeyboardButton("🔙 Главное меню", callback_data="menu")]]
     )
     await query.edit_message_text(text, parse_mode="Markdown", reply_markup=keyboard)
-
-async def load_lesson(query, user_id, lesson, section):
-    store = user_store[user_id]
-    store["section"] = section
-    store["questions"] = list(lesson["questions"])
-    store["q_index"] = 0
-    store["lesson_hw"] = lesson["homework"]
-    await query.edit_message_text(
-        lesson["rule"],
-        parse_mode="Markdown",
-        reply_markup=lesson_keyboard()
-    )
 
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -228,25 +229,18 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         store["lesson_hw"] = ""
         await query.edit_message_text("Выбери раздел:", reply_markup=get_main_menu())
 
-    elif data == "sec_grammar":
-        idx = store["grammar_idx"] % len(GRAMMAR_RULES)
-        store["grammar_idx"] += 1
-        await load_lesson(query, user_id, GRAMMAR_RULES[idx], "grammar")
-
-    elif data == "sec_vocab":
-        idx = store["vocab_idx"] % len(VOCAB_RULES)
-        store["vocab_idx"] += 1
-        await load_lesson(query, user_id, VOCAB_RULES[idx], "vocab")
-
-    elif data == "sec_reading":
-        idx = store["reading_idx"] % len(READING_LESSONS)
-        store["reading_idx"] += 1
-        await load_lesson(query, user_id, READING_LESSONS[idx], "reading")
-
-    elif data == "sec_writing":
-        idx = store["writing_idx"] % len(WRITING_LESSONS)
-        store["writing_idx"] += 1
-        await load_lesson(query, user_id, WRITING_LESSONS[idx], "writing")
+    elif data in ("sec_grammar", "sec_vocab", "sec_reading", "sec_writing"):
+        section = data.replace("sec_", "")
+        lessons = LESSONS[section]
+        idx_key = IDX_KEYS[section]
+        idx = store[idx_key] % len(lessons)
+        store[idx_key] += 1
+        lesson = lessons[idx]
+        store["section"] = section
+        store["questions"] = list(lesson["questions"])
+        store["q_index"] = 0
+        store["lesson_hw"] = lesson["homework"]
+        await query.edit_message_text(lesson["rule"], parse_mode="Markdown", reply_markup=lesson_keyboard())
 
     elif data == "sec_speaking":
         idx = store["speaking_idx"] % len(SPEAKING_TIPS)
@@ -286,12 +280,6 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
     elif data == "start_test":
-        if not store["questions"]:
-            await query.edit_message_text(
-                "Сначала выбери раздел из меню!",
-                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Меню", callback_data="menu")]])
-            )
-            return
         store["q_index"] = 0
         await send_question(query, user_id)
 
