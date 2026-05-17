@@ -7,178 +7,151 @@ logging.basicConfig(level=logging.INFO)
 
 TOKEN = "8850167918:AAF0a6ubRqC7oAsWpt-0oCvzGBfOlwjqDCs"
 
-GRAMMAR_RULES = [
-    {
-        "title": "Present Perfect vs Past Simple",
+LESSONS = {
+    "g0": {
         "rule": "📗 *Present Perfect vs Past Simple*\n\n✅ *Present Perfect* — действие связано с настоящим:\n• I have lost my keys.\n• She has lived here for 5 years.\n\n✅ *Past Simple* — действие завершено в прошлом:\n• I lost my keys yesterday.\n• She lived in Paris in 2010.\n\n⚠️ *Ключевые слова:*\nPP: already, yet, just, ever, never, for, since\nPS: yesterday, ago, last year, in 2010",
-        "homework": "📝 *Домашнее задание:*\n\nНапиши 5 предложений используя Present Perfect и 5 — Past Simple.\n\nПример:\n• I have never been to London.\n• I visited Moscow last summer.",
-        "key": "grammar_0",
-        "questions": [
-            {"q": "I ___ my homework already.", "options": ["did", "have done", "do", "done"], "a": "have done", "exp": "already → Present Perfect"},
-            {"q": "She ___ to Paris in 2019.", "options": ["has gone", "went", "goes", "have gone"], "a": "went", "exp": "in 2019 — конкретная дата → Past Simple"},
-            {"q": "They ___ here for 10 years.", "options": ["lived", "live", "have lived", "are living"], "a": "have lived", "exp": "for + незавершённый период → Present Perfect"},
-            {"q": "___ you ever tried sushi?", "options": ["Did", "Do", "Have", "Are"], "a": "Have", "exp": "ever → Present Perfect"},
+        "hw": "📝 *Домашнее задание:*\n\nНапиши 5 предложений используя Present Perfect и 5 — Past Simple.\n\nПример:\n• I have never been to London.\n• I visited Moscow last summer.",
+        "q": [
+            {"q": "I ___ my homework already.", "o": ["did", "have done", "do", "done"], "a": "have done", "e": "already → Present Perfect"},
+            {"q": "She ___ to Paris in 2019.", "o": ["has gone", "went", "goes", "have gone"], "a": "went", "e": "in 2019 → Past Simple"},
+            {"q": "They ___ here for 10 years.", "o": ["lived", "live", "have lived", "are living"], "a": "have lived", "e": "for + незавершённый период → Present Perfect"},
+            {"q": "___ you ever tried sushi?", "o": ["Did", "Do", "Have", "Are"], "a": "Have", "e": "ever → Present Perfect"},
         ]
     },
-    {
-        "title": "Conditionals",
-        "rule": "📗 *Условные предложения (Conditionals)*\n\n✅ *1st Conditional* — реальное будущее:\nIf + Present Simple → will + infinitive\n• If it rains, I will stay home.\n\n✅ *2nd Conditional* — нереальное настоящее:\nIf + Past Simple → would + infinitive\n• If I were rich, I would travel the world.\n\n✅ *3rd Conditional* — нереальное прошлое:\nIf + Past Perfect → would have + past participle\n• If I had studied, I would have passed.",
-        "homework": "📝 *Домашнее задание:*\n\nЗакончи предложения:\n1. If I win the lottery, I will...\n2. If I were a teacher, I would...\n3. If I had woken up earlier, I would have...",
-        "key": "grammar_1",
-        "questions": [
-            {"q": "If it ___ tomorrow, we'll cancel the trip.", "options": ["rained", "rains", "will rain", "rain"], "a": "rains", "exp": "1st Conditional: If + Present Simple"},
-            {"q": "If I ___ you, I would apologise.", "options": ["am", "was", "were", "be"], "a": "were", "exp": "2nd Conditional: If I were you..."},
-            {"q": "If she had studied harder, she ___ the exam.", "options": ["passed", "would pass", "would have passed", "had passed"], "a": "would have passed", "exp": "3rd Conditional: would have + past participle"},
-            {"q": "If he ___ earlier, he wouldn't have missed the train.", "options": ["left", "leaves", "had left", "would leave"], "a": "had left", "exp": "3rd Conditional: If + Past Perfect"},
+    "g1": {
+        "rule": "📗 *Conditionals*\n\n✅ *1st* — реальное будущее:\nIf + Present Simple → will\n• If it rains, I will stay home.\n\n✅ *2nd* — нереальное настоящее:\nIf + Past Simple → would\n• If I were rich, I would travel.\n\n✅ *3rd* — нереальное прошлое:\nIf + Past Perfect → would have\n• If I had studied, I would have passed.",
+        "hw": "📝 *Домашнее задание:*\n\nЗакончи предложения:\n1. If I win the lottery, I will...\n2. If I were a teacher, I would...\n3. If I had woken up earlier, I would have...",
+        "q": [
+            {"q": "If it ___ tomorrow, we'll cancel the trip.", "o": ["rained", "rains", "will rain", "rain"], "a": "rains", "e": "1st Conditional: If + Present Simple"},
+            {"q": "If I ___ you, I would apologise.", "o": ["am", "was", "were", "be"], "a": "were", "e": "2nd Conditional: If I were you..."},
+            {"q": "If she had studied harder, she ___ the exam.", "o": ["passed", "would pass", "would have passed", "had passed"], "a": "would have passed", "e": "3rd Conditional: would have + past participle"},
+            {"q": "If he ___ earlier, he wouldn't have missed the train.", "o": ["left", "leaves", "had left", "would leave"], "a": "had left", "e": "3rd Conditional: If + Past Perfect"},
         ]
     },
-    {
-        "title": "Passive Voice",
-        "rule": "📗 *Passive Voice (Страдательный залог)*\n\n✅ Структура: *be + past participle*\n\n• Present: The book is written.\n• Past: The book was written.\n• Future: The book will be written.\n• Present Perfect: The book has been written.\n\n✅ Когда использовать:\n• Когда не знаем кто сделал действие\n• В формальном тексте\n• Когда объект важнее субъекта",
-        "homework": "📝 *Домашнее задание:*\n\nПереведи в пассивный залог:\n1. They build houses every year.\n2. Someone stole my bag.\n3. They have invented a new vaccine.",
-        "key": "grammar_2",
-        "questions": [
-            {"q": "The Mona Lisa ___ by Leonardo da Vinci.", "options": ["painted", "was painted", "has painted", "is painting"], "a": "was painted", "exp": "Passive Past Simple: was + past participle"},
-            {"q": "English ___ all over the world.", "options": ["speaks", "spoke", "is spoken", "has spoken"], "a": "is spoken", "exp": "Passive Present Simple: is + past participle"},
-            {"q": "The results ___ tomorrow.", "options": ["will announce", "announce", "will be announced", "are announced"], "a": "will be announced", "exp": "Passive Future: will be + past participle"},
-            {"q": "The bridge ___ for two years.", "options": ["is building", "has been built", "has been building", "built"], "a": "has been built", "exp": "Passive Present Perfect: has been + past participle"},
+    "g2": {
+        "rule": "📗 *Passive Voice*\n\n✅ Структура: *be + past participle*\n\n• Present: is written\n• Past: was written\n• Future: will be written\n• Present Perfect: has been written\n\n✅ Когда использовать:\n• Не знаем кто сделал действие\n• В формальном тексте",
+        "hw": "📝 *Домашнее задание:*\n\nПереведи в пассивный залог:\n1. They build houses every year.\n2. Someone stole my bag.\n3. They have invented a new vaccine.",
+        "q": [
+            {"q": "The Mona Lisa ___ by Leonardo da Vinci.", "o": ["painted", "was painted", "has painted", "is painting"], "a": "was painted", "e": "Passive Past: was + past participle"},
+            {"q": "English ___ all over the world.", "o": ["speaks", "spoke", "is spoken", "has spoken"], "a": "is spoken", "e": "Passive Present: is + past participle"},
+            {"q": "The results ___ tomorrow.", "o": ["will announce", "announce", "will be announced", "are announced"], "a": "will be announced", "e": "Passive Future: will be + past participle"},
+            {"q": "The bridge ___ for two years.", "o": ["is building", "has been built", "has been building", "built"], "a": "has been built", "e": "Passive Perfect: has been + past participle"},
         ]
     },
-]
+    "v0": {
+        "rule": "📘 *Коллокации*\n\n✅ *Make vs Do:*\nMAKE: make a decision, make progress, make a mistake\nDO: do homework, do research, do well\n\n✅ *Have vs Take:*\nHAVE: have a look, have fun, have a rest\nTAKE: take a photo, take part, take a break",
+        "hw": "📝 *Домашнее задание:*\n\nВыбери правильное слово:\n1. ___ a decision\n2. ___ research\n3. ___ a photo\n4. ___ fun\n5. ___ a mistake",
+        "q": [
+            {"q": "She ___ a lot of progress this year.", "o": ["did", "made", "had", "took"], "a": "made", "e": "make progress — коллокация"},
+            {"q": "Can you ___ a look at my essay?", "o": ["make", "do", "have", "take"], "a": "have", "e": "have a look — коллокация"},
+            {"q": "He ___ part in the competition.", "o": ["made", "did", "had", "took"], "a": "took", "e": "take part — коллокация"},
+            {"q": "I need to ___ some research.", "o": ["make", "do", "have", "take"], "a": "do", "e": "do research — коллокация"},
+        ]
+    },
+    "v1": {
+        "rule": "📘 *Суффиксы*\n\n✅ *Существительные:*\n-tion: education\n-ment: employment\n-ness: happiness\n-ity: creativity\n\n✅ *Прилагательные:*\n-ful: beautiful\n-less: careless\n-able: reliable\n\n✅ *Наречия:*\n-ly: carefully",
+        "hw": "📝 *Домашнее задание:*\n\nОбразуй слова:\n1. CREATE → ___ (noun)\n2. RELY → ___ (adjective)\n3. HAPPY → ___ (adverb)\n4. EMPLOY → ___ (noun)\n5. CARE → ___ (adjective, negative)",
+        "q": [
+            {"q": "Her ___ (creative) was impressive.", "o": ["create", "creation", "creativity", "creative"], "a": "creativity", "e": "-ity: creativity = творчество"},
+            {"q": "He is a very ___ (rely) person.", "o": ["rely", "relying", "reliance", "reliable"], "a": "reliable", "e": "-able: reliable = надёжный"},
+            {"q": "She spoke ___ (careful).", "o": ["careful", "carefulness", "carefully", "careless"], "a": "carefully", "e": "-ly для наречий"},
+            {"q": "The ___ (employ) rate has risen.", "o": ["employ", "employee", "employment", "employable"], "a": "employment", "e": "-ment: employment = занятость"},
+        ]
+    },
+    "r0": {
+        "rule": "📰 *Reading — Стратегия FCE*\n\n✅ *Part 5:*\n1. Прочитай вопросы сначала\n2. Найди нужный абзац\n3. Ищи перефраз\n\n✅ *Part 6:*\n1. Читай текст целиком\n2. Следи за местоимениями\n\n✅ *Part 7:*\n1. Подчёркивай ключевые слова\n2. Сканируй текст быстро",
+        "hw": "📝 *Домашнее задание:*\n\nПрочитай статью на английском (BBC):\n1. Выпиши 10 незнакомых слов\n2. Определи главную мысль каждого абзаца\n3. Перескажи в 3-4 предложениях",
+        "q": [
+            {"q": "Social media enables connectivity but experts warn about addiction and misinformation.\n\nWhat do experts warn about?", "o": ["High cost", "Negative effects", "Lack of users", "Slow speed"], "a": "Negative effects", "e": "Текст: addiction, misinformation — негативные эффекты"},
+            {"q": "The Amazon produces 20% of world's oxygen. Deforestation threatens this ecosystem.\n\nWhy is the Amazon important?", "o": ["It is large", "It produces oxygen", "It has animals", "It is old"], "a": "It produces oxygen", "e": "Текст: 'produces 20% of world's oxygen'"},
+        ]
+    },
+    "w0": {
+        "rule": "✏️ *Essay Writing (FCE)*\n\n✅ *Структура (180-190 слов):*\n1. Introduction\n2. Body paragraph 1\n3. Body paragraph 2\n4. Conclusion\n\n✅ *Полезные фразы:*\nIntro: Nowadays... / It is argued that...\nAdding: Furthermore, / Moreover,\nContrast: However, / Nevertheless,\nConclusion: In conclusion, / To sum up,\n\n⚠️ Только формальный стиль!",
+        "hw": "📝 *Домашнее задание:*\n\nНапиши эссе (180-190 слов):\n*'Social media does more harm than good.'*\n\n• Introduction\n• Para 1: вред\n• Para 2: польза\n• Conclusion",
+        "q": [
+            {"q": "Какая фраза подходит для введения?", "o": ["Nowadays, lots of people...", "Hey, basically...", "I'm gonna talk...", "Well, it's like..."], "a": "Nowadays, lots of people...", "e": "Формальный стиль: Nowadays..."},
+            {"q": "Какое слово показывает КОНТРАСТ?", "o": ["Furthermore", "Moreover", "However", "In addition"], "a": "However", "e": "However = однако"},
+            {"q": "Что НЕЛЬЗЯ в формальном тексте?", "o": ["Passive voice", "Сокращения (don't)", "Сложные предложения", "Формальная лексика"], "a": "Сокращения (don't)", "e": "Пиши: do not, cannot"},
+        ]
+    },
+}
 
-VOCAB_RULES = [
-    {
-        "title": "Коллокации",
-        "rule": "📘 *Коллокации — устойчивые словосочетания*\n\n✅ *Make vs Do:*\nMAKE: make a decision, make an effort, make a mistake, make progress\nDO: do homework, do research, do damage, do well\n\n✅ *Have vs Take:*\nHAVE: have a shower, have a look, have fun, have a rest\nTAKE: take a photo, take part, take a break, take a risk",
-        "homework": "📝 *Домашнее задание:*\n\nВыбери правильное слово:\n1. ___ a decision\n2. ___ research\n3. ___ a photo\n4. ___ fun\n5. ___ a mistake",
-        "key": "vocab_0",
-        "questions": [
-            {"q": "She ___ a lot of progress this year.", "options": ["did", "made", "had", "took"], "a": "made", "exp": "make progress — коллокация"},
-            {"q": "Can you ___ a look at my essay?", "options": ["make", "do", "have", "take"], "a": "have", "exp": "have a look — коллокация"},
-            {"q": "He ___ part in the competition.", "options": ["made", "did", "had", "took"], "a": "took", "exp": "take part — коллокация"},
-            {"q": "I need to ___ some research.", "options": ["make", "do", "have", "take"], "a": "do", "exp": "do research — коллокация"},
-        ]
-    },
-    {
-        "title": "Суффиксы",
-        "rule": "📘 *Словообразование (Word Formation)*\n\n✅ *Существительные:*\n-tion: education, information\n-ment: employment, achievement\n-ness: happiness, darkness\n-ity: creativity, curiosity\n\n✅ *Прилагательные:*\n-ful: beautiful, careful\n-less: careless, useless\n-able: reliable, comfortable\n\n✅ *Наречия:*\n-ly: carefully, quickly",
-        "homework": "📝 *Домашнее задание:*\n\nОбразуй слова:\n1. CREATE → ___ (noun)\n2. RELY → ___ (adjective)\n3. HAPPY → ___ (adverb)\n4. EMPLOY → ___ (noun)\n5. CARE → ___ (adjective, negative)",
-        "key": "vocab_1",
-        "questions": [
-            {"q": "Her ___ (creative) was impressive.", "options": ["create", "creation", "creativity", "creative"], "a": "creativity", "exp": "-ity: creativity = творчество"},
-            {"q": "He is a very ___ (rely) person.", "options": ["rely", "relying", "reliance", "reliable"], "a": "reliable", "exp": "-able: reliable = надёжный"},
-            {"q": "She spoke ___ (careful) about the topic.", "options": ["careful", "carefulness", "carefully", "careless"], "a": "carefully", "exp": "-ly для наречий: carefully"},
-            {"q": "The ___ (employ) rate has risen.", "options": ["employ", "employee", "employment", "employable"], "a": "employment", "exp": "-ment: employment = занятость"},
-        ]
-    },
-]
-
-READING_LESSONS = [
-    {
-        "title": "Стратегия чтения FCE",
-        "rule": "📰 *Reading — Стратегия FCE*\n\n✅ *Part 5 (Multiple Choice):*\n1. Прочитай вопросы сначала\n2. Найди нужный абзац\n3. Ищи перефраз, не точные слова\n4. Исключай неправильные ответы\n\n✅ *Part 6 (Gapped text):*\n1. Читай текст целиком\n2. Обращай внимание на местоимения\n3. Ищи связующие слова\n\n✅ *Part 7:*\n1. Подчёркивай ключевые слова\n2. Сканируй текст быстро",
-        "homework": "📝 *Домашнее задание:*\n\nПрочитай статью на английском (BBC, The Guardian):\n1. Выпиши 10 незнакомых слов\n2. Определи главную мысль каждого абзаца\n3. Перескажи статью в 3-4 предложениях",
-        "key": "reading_0",
-        "questions": [
-            {"text": "Social media has transformed communication. While it enables instant global connectivity, experts warn about addiction, privacy issues, and misinformation spreading rapidly online.", "q": "What is the main concern experts have about social media?", "options": ["It is too expensive", "It has negative effects", "It is not popular", "It is too slow"], "a": "It has negative effects", "exp": "Текст упоминает addiction, privacy issues, misinformation"},
-            {"text": "The Amazon rainforest produces 20% of the world's oxygen. However, deforestation threatens this vital ecosystem.", "q": "Why is the Amazon important?", "options": ["It is very large", "It produces oxygen", "It has many animals", "It is very old"], "a": "It produces oxygen", "exp": "Текст: 'produces 20% of the world's oxygen'"},
-        ]
-    },
-]
-
-WRITING_LESSONS = [
-    {
-        "title": "Essay Writing",
-        "rule": "✏️ *Essay Writing (FCE Part 1)*\n\n✅ *Структура (180-190 слов):*\n1. Introduction — представь тему\n2. Body paragraph 1 — первый аргумент\n3. Body paragraph 2 — второй аргумент\n4. Conclusion — вывод\n\n✅ *Полезные фразы:*\nIntro: It is often argued that... / Nowadays...\nAdding: Furthermore, / Moreover,\nContrast: However, / Nevertheless,\nConclusion: In conclusion, / To sum up,\n\n⚠️ Формальный стиль — no contractions!",
-        "homework": "📝 *Домашнее задание:*\n\nНапиши эссе (180-190 слов):\n*'Social media does more harm than good.'*\n\n• Введение\n• Абзац 1: вред\n• Абзац 2: польза\n• Заключение",
-        "key": "writing_0",
-        "questions": [
-            {"q": "Какая фраза подходит для введения эссе?", "options": ["Nowadays, lots of people...", "Hey, so basically...", "I'm gonna talk about...", "Well, it's like..."], "a": "Nowadays, lots of people...", "exp": "Формальный стиль: Nowadays, lots of people..."},
-            {"q": "Какое слово показывает КОНТРАСТ?", "options": ["Furthermore", "Moreover", "However", "In addition"], "a": "However", "exp": "However = однако — слово контраста"},
-            {"q": "Что НЕЛЬЗЯ в формальном тексте?", "options": ["Passive voice", "Сокращения (don't)", "Сложные предложения", "Формальная лексика"], "a": "Сокращения (don't)", "exp": "В формальном стиле: do not, cannot (не don't, can't)"},
-        ]
-    },
-]
+GRAMMAR_KEYS = ["g0", "g1", "g2"]
+VOCAB_KEYS = ["v0", "v1"]
+READING_KEYS = ["r0"]
+WRITING_KEYS = ["w0"]
 
 SPEAKING_TIPS = [
-    "🗣 *Part 1 — Интервью (2 мин)*\n\nОтвечай развёрнуто!\nСтруктура: *Ответ + причина + пример*\n\n❌ 'Yes'\n✅ 'Yes, I really enjoy football because it keeps me fit.'\n\n💡 Полезные фразы:\n• As far as I'm concerned...\n• To be honest...\n• What I really enjoy is...",
-    "🗣 *Part 2 — Long Turn (1 мин)*\n\nОписывай и сравнивай фотографии!\n\n✅ Структура:\n1. In the first photo I can see...\n2. In contrast, the second photo shows...\n3. Both photos seem to be about...",
-    "🗣 *Part 3 — Discussion (3 мин)*\n\nОбсуждай с партнёром!\n\n✅ Полезные фразы:\n• What do you think about...?\n• I agree with you because...\n• That's a good point, but...",
+    "🗣 *Part 1 — Интервью*\n\nОтвечай развёрнуто!\n*Ответ + причина + пример*\n\n❌ 'Yes'\n✅ 'Yes, I enjoy football because it keeps me fit.'\n\n• As far as I'm concerned...\n• To be honest...",
+    "🗣 *Part 2 — Long Turn*\n\nСравнивай фотографии!\n\n1. In the first photo I can see...\n2. In contrast, the second shows...\n3. Both photos seem to be about...",
+    "🗣 *Part 3 — Discussion*\n\nОбсуждай с партнёром!\n\n• What do you think about...?\n• I agree because...\n• That's a good point, but...",
 ]
 
 LISTENING_TIPS = [
-    "🎧 *FCE Listening — Советы*\n\n✅ ДО прослушивания:\n• Читай вопросы внимательно\n• Подчёркивай ключевые слова\n\n✅ ВО ВРЕМЯ:\n• Слушай контекст, не только слова\n• Не паникуй если пропустил\n\n⚠️ but, however → меняют смысл!",
-    "🎧 *FCE Listening — 4 части*\n\n• *Part 1:* 8 диалогов — MCQ\n• *Part 2:* Монолог — заполни пропуски\n• *Part 3:* 5 говорящих — сопоставь\n• *Part 4:* Интервью — MCQ",
+    "🎧 *Listening — Советы*\n\n✅ ДО:\n• Читай вопросы\n• Подчёркивай ключевые слова\n\n✅ ВО ВРЕМЯ:\n• Слушай контекст\n• but, however → меняют смысл!\n• actually → исправление!",
+    "🎧 *Listening — 4 части*\n\n• Part 1: 8 диалогов — MCQ\n• Part 2: Монолог — пропуски\n• Part 3: 5 говорящих — сопоставь\n• Part 4: Интервью — MCQ",
 ]
-
-ALL_LESSONS = {}
-for l in GRAMMAR_RULES + VOCAB_RULES + READING_LESSONS + WRITING_LESSONS:
-    ALL_LESSONS[l["key"]] = l
 
 user_store = {}
 
 def init_user(user_id):
     if user_id not in user_store:
         user_store[user_id] = {
-            "correct": 0,
-            "wrong": 0,
-            "speaking_idx": 0,
-            "listening_idx": 0,
+            "correct": 0, "wrong": 0,
+            "speaking_idx": 0, "listening_idx": 0,
         }
 
 def get_main_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("📗 Грамматика", callback_data="sec_grammar"),
-         InlineKeyboardButton("📘 Словарный запас", callback_data="sec_vocab")],
-        [InlineKeyboardButton("📰 Reading", callback_data="sec_reading"),
-         InlineKeyboardButton("✏️ Writing", callback_data="sec_writing")],
-        [InlineKeyboardButton("🗣 Speaking", callback_data="sec_speaking"),
-         InlineKeyboardButton("🎧 Listening", callback_data="sec_listening")],
-        [InlineKeyboardButton("📊 Моя статистика", callback_data="stats")],
+        [InlineKeyboardButton("📗 Грамматика", callback_data="sec_g"),
+         InlineKeyboardButton("📘 Словарный запас", callback_data="sec_v")],
+        [InlineKeyboardButton("📰 Reading", callback_data="sec_r"),
+         InlineKeyboardButton("✏️ Writing", callback_data="sec_w")],
+        [InlineKeyboardButton("🗣 Speaking", callback_data="sec_sp"),
+         InlineKeyboardButton("🎧 Listening", callback_data="sec_li")],
+        [InlineKeyboardButton("📊 Статистика", callback_data="stats")],
+    ])
+
+def make_lesson_kb(lkey, qidx):
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("📝 Начать тест", callback_data=f"Q|{lkey}|{qidx}")],
+        [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"HW|{lkey}")],
+        [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
     ])
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
     init_user(user.id)
     await update.message.reply_text(
-        f"Привет, {user.first_name}! 👋\n\n"
-        f"🎓 *FCE B2 English Trainer*\n\n"
-        f"Здесь ты найдёшь:\n"
-        f"• Объяснение правил\n"
-        f"• Тесты для закрепления\n"
-        f"• Домашние задания\n\n"
-        f"Выбери раздел:",
+        f"Привет, {user.first_name}! 👋\n\n🎓 *FCE B2 English Trainer*\n\nВыбери раздел:",
         parse_mode="Markdown",
         reply_markup=get_main_menu()
     )
 
-async def show_lesson(query, lesson_key, q_index=0):
-    lesson = ALL_LESSONS[lesson_key]
-    questions = lesson["questions"]
+async def show_question(query, lkey, qidx, user_id):
+    lesson = LESSONS[lkey]
+    questions = lesson["q"]
 
-    if q_index >= len(questions):
+    if qidx >= len(questions):
         await query.edit_message_text(
-            "🎉 *Тест завершён! Отличная работа!*\n\nНе забудь выполнить домашнее задание!",
+            "🎉 *Тест завершён! Отличная работа!*",
             parse_mode="Markdown",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔄 Пройти снова", callback_data=f"test_{lesson_key}_0")],
-                [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
+                [InlineKeyboardButton("🔄 Пройти снова", callback_data=f"Q|{lkey}|0")],
+                [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
             ])
         )
         return
 
-    q = questions[q_index]
-    options = q["options"][:]
-    random.shuffle(options)
-
-    text = f"❓ *Вопрос {q_index + 1}/{len(questions)}*\n\n"
-    if "text" in q:
-        text += f"📄 _{q['text']}_\n\n"
-    text += q["q"]
+    q = questions[qidx]
+    opts = q["o"][:]
+    random.shuffle(opts)
+    text = f"❓ *Вопрос {qidx+1}/{len(questions)}*\n\n{q['q']}"
 
     keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton(opt, callback_data=f"ans_{lesson_key}_{q_index}_{opt}")] for opt in options] +
-        [[InlineKeyboardButton("🔙 Главное меню", callback_data="menu")]]
+        [[InlineKeyboardButton(o, callback_data=f"A|{lkey}|{qidx}|{o}")] for o in opts] +
+        [[InlineKeyboardButton("🔙 Меню", callback_data="menu")]]
     )
     await query.edit_message_text(text, parse_mode="Markdown", reply_markup=keyboard)
 
@@ -193,99 +166,59 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if data == "menu":
         await query.edit_message_text("Выбери раздел:", reply_markup=get_main_menu())
 
-    elif data == "sec_grammar":
-        lesson = random.choice(GRAMMAR_RULES)
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("📝 Начать тест", callback_data=f"test_{lesson['key']}_0")],
-            [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"hw_{lesson['key']}")],
-            [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
-        ])
-        await query.edit_message_text(lesson["rule"], parse_mode="Markdown", reply_markup=keyboard)
+    elif data == "sec_g":
+        lkey = random.choice(GRAMMAR_KEYS)
+        await query.edit_message_text(LESSONS[lkey]["rule"], parse_mode="Markdown", reply_markup=make_lesson_kb(lkey, 0))
 
-    elif data == "sec_vocab":
-        lesson = random.choice(VOCAB_RULES)
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("📝 Начать тест", callback_data=f"test_{lesson['key']}_0")],
-            [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"hw_{lesson['key']}")],
-            [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
-        ])
-        await query.edit_message_text(lesson["rule"], parse_mode="Markdown", reply_markup=keyboard)
+    elif data == "sec_v":
+        lkey = random.choice(VOCAB_KEYS)
+        await query.edit_message_text(LESSONS[lkey]["rule"], parse_mode="Markdown", reply_markup=make_lesson_kb(lkey, 0))
 
-    elif data == "sec_reading":
-        lesson = random.choice(READING_LESSONS)
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("📝 Начать тест", callback_data=f"test_{lesson['key']}_0")],
-            [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"hw_{lesson['key']}")],
-            [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
-        ])
-        await query.edit_message_text(lesson["rule"], parse_mode="Markdown", reply_markup=keyboard)
+    elif data == "sec_r":
+        lkey = random.choice(READING_KEYS)
+        await query.edit_message_text(LESSONS[lkey]["rule"], parse_mode="Markdown", reply_markup=make_lesson_kb(lkey, 0))
 
-    elif data == "sec_writing":
-        lesson = random.choice(WRITING_LESSONS)
-        keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton("📝 Начать тест", callback_data=f"test_{lesson['key']}_0")],
-            [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"hw_{lesson['key']}")],
-            [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
-        ])
-        await query.edit_message_text(lesson["rule"], parse_mode="Markdown", reply_markup=keyboard)
+    elif data == "sec_w":
+        lkey = random.choice(WRITING_KEYS)
+        await query.edit_message_text(LESSONS[lkey]["rule"], parse_mode="Markdown", reply_markup=make_lesson_kb(lkey, 0))
 
-    elif data == "sec_speaking":
+    elif data == "sec_sp":
         idx = store["speaking_idx"] % len(SPEAKING_TIPS)
         store["speaking_idx"] += 1
-        await query.edit_message_text(
-            SPEAKING_TIPS[idx],
-            parse_mode="Markdown",
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔄 Следующий совет", callback_data="sec_speaking")],
-                [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
-            ])
-        )
+        await query.edit_message_text(SPEAKING_TIPS[idx], parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("🔄 Следующий совет", callback_data="sec_sp")],
+            [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
+        ]))
 
-    elif data == "sec_listening":
+    elif data == "sec_li":
         idx = store["listening_idx"] % len(LISTENING_TIPS)
         store["listening_idx"] += 1
-        await query.edit_message_text(
-            LISTENING_TIPS[idx],
-            parse_mode="Markdown",
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔄 Следующий совет", callback_data="sec_listening")],
-                [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
-            ])
-        )
+        await query.edit_message_text(LISTENING_TIPS[idx], parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("🔄 Следующий совет", callback_data="sec_li")],
+            [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
+        ]))
 
-    elif data.startswith("hw_"):
-        lesson_key = data[3:]
-        lesson = ALL_LESSONS.get(lesson_key)
-        if lesson:
-            await query.edit_message_text(
-                lesson["homework"],
-                parse_mode="Markdown",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton("📝 Начать тест", callback_data=f"test_{lesson_key}_0")],
-                    [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
-                ])
-            )
+    elif data.startswith("HW|"):
+        lkey = data.split("|")[1]
+        await query.edit_message_text(LESSONS[lkey]["hw"], parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("📝 Начать тест", callback_data=f"Q|{lkey}|0")],
+            [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
+        ]))
 
-    elif data.startswith("test_"):
-        parts = data.split("_")
-        lesson_key = f"{parts[1]}_{parts[2]}"
-        q_index = int(parts[3])
-        await show_lesson(query, lesson_key, q_index)
+    elif data.startswith("Q|"):
+        parts = data.split("|")
+        lkey = parts[1]
+        qidx = int(parts[2])
+        await show_question(query, lkey, qidx, user_id)
 
-    elif data.startswith("ans_"):
-        parts = data.split("_", 4)
-        lesson_key = f"{parts[1]}_{parts[2]}"
-        q_index = int(parts[3])
-        chosen = parts[4]
-
-        lesson = ALL_LESSONS.get(lesson_key)
-        if not lesson:
-            return
-
-        q = lesson["questions"][q_index]
+    elif data.startswith("A|"):
+        parts = data.split("|", 4)
+        lkey = parts[1]
+        qidx = int(parts[2])
+        chosen = parts[3]
+        q = LESSONS[lkey]["q"][qidx]
         correct = q["a"]
-        exp = q["exp"]
-        next_index = q_index + 1
+        exp = q["e"]
 
         if chosen == correct:
             store["correct"] += 1
@@ -294,40 +227,29 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             store["wrong"] += 1
             text = f"❌ *Неправильно!*\n\nПравильный ответ: *{correct}*\n\n💡 {exp}"
 
-        await query.edit_message_text(
-            text,
-            parse_mode="Markdown",
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("➡️ Следующий вопрос", callback_data=f"test_{lesson_key}_{next_index}")],
-                [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
-            ])
-        )
+        await query.edit_message_text(text, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("➡️ Следующий вопрос", callback_data=f"Q|{lkey}|{qidx+1}")],
+            [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
+        ]))
 
     elif data == "stats":
         total = store["correct"] + store["wrong"]
         percent = int(store["correct"] / total * 100) if total > 0 else 0
         await query.edit_message_text(
-            f"📊 *Твоя статистика:*\n\n"
-            f"✅ Правильных: {store['correct']}\n"
-            f"❌ Неправильных: {store['wrong']}\n"
-            f"🎯 Точность: {percent}%\n\n"
-            f"Продолжай заниматься! 💪",
+            f"📊 *Статистика:*\n\n✅ Правильных: {store['correct']}\n❌ Неправильных: {store['wrong']}\n🎯 Точность: {percent}%\n\n💪 Продолжай!",
             parse_mode="Markdown",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Главное меню", callback_data="menu")]])
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Меню", callback_data="menu")]])
         )
 
 async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "Используй кнопки! 👇\nНажми /start чтобы начать.",
-        reply_markup=get_main_menu()
-    )
+    await update.message.reply_text("Нажми /start чтобы начать! 👇")
 
 def main():
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_handler))
-    print("FCE Bot started!")
+    print("Bot started!")
     app.run_polling()
 
 if __name__ == "__main__":
