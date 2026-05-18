@@ -114,9 +114,10 @@ def get_main_menu():
     ])
 
 def make_lesson_kb(lkey, qidx):
+    # Изменили разделитель на двоеточие, чтобы избежать конфликтов
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("📝 Начать тест", callback_data=f"Q|{lkey}|{qidx}")],
-        [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"HW|{lkey}")],
+        [InlineKeyboardButton("📝 Начать тест", callback_data=f"Q:{lkey}:{qidx}")],
+        [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"HW:{lkey}")],
         [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
     ])
 
@@ -138,7 +139,7 @@ async def show_question(query, lkey, qidx, user_id):
             "🎉 *Тест завершён! Отличная работа!*",
             parse_mode="Markdown",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔄 Пройти снова", callback_data=f"Q|{lkey}|0")],
+                [InlineKeyboardButton("🔄 Пройти снова", callback_data=f"Q:{lkey}:0")],
                 [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
             ])
         )
@@ -149,8 +150,9 @@ async def show_question(query, lkey, qidx, user_id):
     random.shuffle(opts)
     text = f"❓ *Вопрос {qidx+1}/{len(questions)}*\n\n{q['q']}"
 
+    # Используем ограничение maxsplit=3 для безопасности ответов
     keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton(o, callback_data=f"A|{lkey}|{qidx}|{o}")] for o in opts] +
+        [[InlineKeyboardButton(o, callback_data=f"A:{lkey}:{qidx}:{o}")] for o in opts] +
         [[InlineKeyboardButton("🔙 Меню", callback_data="menu")]]
     )
     await query.edit_message_text(text, parse_mode="Markdown", reply_markup=keyboard)
@@ -198,21 +200,22 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
         ]))
 
-    elif data.startswith("HW|"):
-        lkey = data.split("|")[1]
+    elif data.startswith("HW:"):
+        lkey = data.split(":")[1]
         await query.edit_message_text(LESSONS[lkey]["hw"], parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("📝 Начать тест", callback_data=f"Q|{lkey}|0")],
+            [InlineKeyboardButton("📝 Начать тест", callback_data=f"Q:{lkey}:0")],
             [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
         ]))
 
-    elif data.startswith("Q|"):
-        parts = data.split("|")
+    elif data.startswith("Q:"):
+        parts = data.split(":")
         lkey = parts[1]
         qidx = int(parts[2])
         await show_question(query, lkey, qidx, user_id)
 
-    elif data.startswith("A|"):
-        parts = data.split("|", 4)
+    elif data.startswith("A:"):
+        # Ограничиваем сплит до 3, чтобы текст ответа (parts[3]) не дробился, если в нем есть двоеточия
+        parts = data.split(":", 3)
         lkey = parts[1]
         qidx = int(parts[2])
         chosen = parts[3]
@@ -228,7 +231,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text = f"❌ *Неправильно!*\n\nПравильный ответ: *{correct}*\n\n💡 {exp}"
 
         await query.edit_message_text(text, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("➡️ Следующий вопрос", callback_data=f"Q|{lkey}|{qidx+1}")],
+            [InlineKeyboardButton("➡️ Следующий вопрос", callback_data=f"Q:{lkey}:{qidx+1}")],
             [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
         ]))
 
