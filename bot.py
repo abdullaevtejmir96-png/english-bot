@@ -1,5 +1,4 @@
 import logging
-import random
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 
@@ -58,8 +57,17 @@ async def show_lesson(query, lesson_idx):
     await query.edit_message_text(lesson["rule"], parse_mode="Markdown", reply_markup=kb)
 
 async def show_question(query, lesson_idx, qi):
+    # Проверка: есть ли тест у урока
+    if "test" not in LESSONS[lesson_idx] or not LESSONS[lesson_idx]["test"]:
+        await query.edit_message_text(
+            "❌ В этом уроке пока нет теста.\n\nВернись в меню и выбери другой раздел.",
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Меню", callback_data="HOME")]])
+        )
+        return
+    
     questions = LESSONS[lesson_idx]["test"]
     if qi >= len(questions):
+        # Тест завершён
         kb = InlineKeyboardMarkup([
             [InlineKeyboardButton("🔄 Пройти снова", callback_data=f"Q:{lesson_idx}:0")],
             [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"HW:{lesson_idx}")],
@@ -72,13 +80,10 @@ async def show_question(query, lesson_idx, qi):
         return
 
     q = questions[qi]
-    opts = list(q["opts"])
-    correct_answer = opts[q["a"]]
-    random.shuffle(opts)
-    new_correct_idx = opts.index(correct_answer)
+    opts = list(q["opts"])  # Без перемешивания
 
     kb = InlineKeyboardMarkup(
-        [[InlineKeyboardButton(o, callback_data=f"A:{lesson_idx}:{qi}:{opts.index(o)}")] for o in opts] +
+        [[InlineKeyboardButton(o, callback_data=f"A:{lesson_idx}:{qi}:{idx}")] for idx, o in enumerate(opts)] +
         [[InlineKeyboardButton("🔙 Меню", callback_data="HOME")]]
     )
     await query.edit_message_text(
@@ -94,7 +99,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     data = query.data
 
     if data == "HOME":
-        await query.edit_message_text("Выбери раздел:", reply_markup=get_main_menu())
+        await query.edit_message_text("📚 *FCE B2 English Trainer*\n\nВыбери раздел:", parse_mode="Markdown", reply_markup=get_main_menu())
 
     elif data == "STAT":
         s = user_stats[uid]
@@ -111,6 +116,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         idxs = get_lessons_by_section(sec)
         if idxs:
             await show_lesson(query, idxs[0])
+        else:
+            await query.edit_message_text("❌ Нет уроков в этом разделе.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Меню", callback_data="HOME")]]))
 
     elif data.startswith("L:"):
         await show_lesson(query, int(data[2:]))
@@ -134,41 +141,66 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         lesson_idx = int(parts[1])
         qi = int(parts[2])
         chosen_idx = int(parts[3])
+        
+        # Проверка: есть ли тест
+        if "test" not in LESSONS[lesson_idx] or qi >= len(LESSONS[lesson_idx]["test"]):
+            await query.edit_message_text("❌ Ошибка: вопрос не найден.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Меню", callback_data="HOME")]]))
+            return
+            
         q = LESSONS[lesson_idx]["test"][qi]
         correct_idx = q["a"]
+        correct_answer = q["opts"][correct_idx]
 
         if chosen_idx == correct_idx:
             user_stats[uid]["correct"] += 1
-            text = "✅ *Правильно!*"
+            text = f"✅ *Правильно!*\n\n{counter_q(qi, len(LESSONS[lesson_idx]['test']))}"
         else:
-            correct_answer = q["opts"][correct_idx]
             user_stats[uid]["wrong"] += 1
-            text = f"❌ *Неправильно!*\n\nПравильный ответ: *{correct_answer}*"
+            text = f"❌ *Неправильно!*\n\nПравильный ответ: *{correct_answer}*\n\n{counter_q(qi, len(LESSONS[lesson_idx]['test']))}"
 
-        kb = InlineKeyboardMarkup([
-            [InlineKeyboardButton("➡️ Следующий вопрос", callback_data=f"Q:{lesson_idx}:{qi+1}")],
-            [InlineKeyboardButton("🔙 Меню", callback_data="HOME")],
-        ])
-        await query.edit_message_text(text, parse_mode="Markdown", reply_markup=kb)
+        # Показываем результат и сразу следующий вопрос
+        next_qi = qi + 1
+        if next_qi >= len(LESSONS[lesson_idx]["test"]):
+            # Тест завершён
+            kb = InlineKeyboardMarkup([
+                [InlineKeyboardButton("🔄 Пройти снова", callback_data=f"Q:{lesson_idx}:0")],
+                [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"HW:{lesson_idx}")],
+                [InlineKeyboardButton("🔙 Меню", callback_data="HOME")],
+            ])
+            await query.edit_message_text(
+                f"{text}\n\n🎉 *Тест завершён! Молодец!*",
+                parse_mode="Markdown", reply_markup=kb
+            )
+        else:
+            # Показываем результат и через паузу следующий вопрос
+            # Но в Telegram нельзя "подождать" перед редактированием, поэтому сделаем кнопку "Следующий"
+            kb = InlineKeyboardMarkup([
+                [InlineKeyboardButton("➡️ Следующий вопрос", callback_data=f"Q:{lesson_idx}:{next_qi}")],
+                [InlineKeyboardButton("🔙 Меню", callback_data="HOME")],
+            ])
+            await query.edit_message_text(text, parse_mode="Markdown", reply_markup=kb)
+
+def counter_q(current, total):
+    return f"📊 *Прогресс:* {current + 1} из {total}" if current + 1 <= total else ""
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     init_user(update.effective_user.id)
     await update.message.reply_text(
-        f"Привет, {update.effective_user.first_name}! 👋\n\n🎓 *FCE B2 English Trainer*\n\nВыбери раздел:",
+        f"Привет, {update.effective_user.first_name}! 👋\n\n📚 *FCE B2 English Trainer*\n\nВыбери раздел:",
         parse_mode="Markdown",
         reply_markup=get_main_menu()
     )
 
 async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Нажми /start! 👇")
+    await update.message.reply_text("Используй кнопки меню. Нажми /start, если меню пропало.")
 
 def main():
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_handler))
-    print("Bot started!")
+    print("✅ Бот запущен!")
     app.run_polling()
 
 if __name__ == "__main__":
-    main() 
+    main()ц
