@@ -3,7 +3,12 @@ import random
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 
-logging.basicConfig(level=logging.INFO)
+# Настройка логирования для отслеживания работы бота
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
 TOKEN = "8850167918:AAF0a6ubRqC7oAsWpt-0oCvzGBfOlwjqDCs"
 
@@ -114,10 +119,10 @@ def get_main_menu():
     ])
 
 def make_lesson_kb(lkey, qidx):
-    # Изменили разделитель на двоеточие, чтобы избежать конфликтов
+    # Используем двоеточие в качестве безопасного разделителя данных кнопки
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("📝 Начать тест", callback_data=f"Q:{lkey}:{qidx}")],
-        [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"HW:{lkey}")],
+        [InlineKeyboardButton("📝 Начать тест", callback_data=f"start_test:{lkey}:{qidx}")],
+        [InlineKeyboardButton("🏠 Домашнее задание", callback_data=f"hw:{lkey}")],
         [InlineKeyboardButton("🔙 Главное меню", callback_data="menu")],
     ])
 
@@ -139,7 +144,7 @@ async def show_question(query, lkey, qidx, user_id):
             "🎉 *Тест завершён! Отличная работа!*",
             parse_mode="Markdown",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔄 Пройти снова", callback_data=f"Q:{lkey}:0")],
+                [InlineKeyboardButton("🔄 Пройти снова", callback_data=f"start_test:{lkey}:0")],
                 [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
             ])
         )
@@ -150,9 +155,9 @@ async def show_question(query, lkey, qidx, user_id):
     random.shuffle(opts)
     text = f"❓ *Вопрос {qidx+1}/{len(questions)}*\n\n{q['q']}"
 
-    # Используем ограничение maxsplit=3 для безопасности ответов
+    # Формируем callback_data для вариантов ответов
     keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton(o, callback_data=f"A:{lkey}:{qidx}:{o}")] for o in opts] +
+        [[InlineKeyboardButton(o, callback_data=f"ans:{lkey}:{qidx}:{o}")] for o in opts] +
         [[InlineKeyboardButton("🔙 Меню", callback_data="menu")]]
     )
     await query.edit_message_text(text, parse_mode="Markdown", reply_markup=keyboard)
@@ -160,6 +165,7 @@ async def show_question(query, lkey, qidx, user_id):
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
+    
     user_id = query.from_user.id
     init_user(user_id)
     store = user_store[user_id]
@@ -200,25 +206,25 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
         ]))
 
-    elif data.startswith("HW:"):
+    elif data.startswith("hw:"):
         lkey = data.split(":")[1]
         await query.edit_message_text(LESSONS[lkey]["hw"], parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("📝 Начать тест", callback_data=f"Q:{lkey}:0")],
+            [InlineKeyboardButton("📝 Начать тест", callback_data=f"start_test:{lkey}:0")],
             [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
         ]))
 
-    elif data.startswith("Q:"):
+    elif data.startswith("start_test:"):
         parts = data.split(":")
         lkey = parts[1]
         qidx = int(parts[2])
         await show_question(query, lkey, qidx, user_id)
 
-    elif data.startswith("A:"):
-        # Ограничиваем сплит до 3, чтобы текст ответа (parts[3]) не дробился, если в нем есть двоеточия
+    elif data.startswith("ans:"):
         parts = data.split(":", 3)
         lkey = parts[1]
         qidx = int(parts[2])
         chosen = parts[3]
+        
         q = LESSONS[lkey]["q"][qidx]
         correct = q["a"]
         exp = q["e"]
@@ -231,7 +237,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text = f"❌ *Неправильно!*\n\nПравильный ответ: *{correct}*\n\n💡 {exp}"
 
         await query.edit_message_text(text, parse_mode="Markdown", reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("➡️ Следующий вопрос", callback_data=f"Q:{lkey}:{qidx+1}")],
+            [InlineKeyboardButton("➡️ Следующий вопрос", callback_data=f"start_test:{lkey}:{qidx+1}")],
             [InlineKeyboardButton("🔙 Меню", callback_data="menu")],
         ]))
 
@@ -249,10 +255,13 @@ async def text_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     app = Application.builder().token(TOKEN).build()
+    
+    # Регистрация всех обработчиков событий
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(button_handler))
+    app.add_handler(CallbackQueryHandler(button_handler))  # <-- Теперь этот обработчик железно привязан!
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, text_handler))
-    print("Bot started!")
+    
+    print("Бот успешно запущен и слушает кнопки!")
     app.run_polling()
 
 if __name__ == "__main__":
