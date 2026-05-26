@@ -4,7 +4,7 @@ from aiogram.filters import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
 # ⚠️ ВСТАВЬ СЮДА СВОЙ ТОКЕН ИЗ BOTFATHER
-API_TOKEN = 'ВСТАВЬ_СЮДА_СВОЙ_ТОКЕН'
+API_TOKEN = '8957320709:AAFfT_ATxTfom6EVuMW9con9Yvm-1FqwwtM'
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
