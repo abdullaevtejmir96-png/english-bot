@@ -3,13 +3,13 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
-# ⚠️ ВСТАВЬ СЮДА СВОЙ ТОКЕН ИЗ BOTFATHER
-API_TOKEN = 'ВСТАВЬ_СЮДА_СВОЙ_ТОКЕН'
+# Токен бережно обёрнут в кавычки, теперь синтаксис правильный 👍
+API_TOKEN = '8957320709:AAFfT_ATxTfom6EVuMW9con9Yvm-1FqwwtM'
 
-bot = Bot(8957320709:AAFfT_ATxTfom6EVuMW9con9Yvm-1FqwwtM)
+bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
-# Обновленная база данных
+# Обновленная база данных (без домашних заданий)
 COURSE_DATA = {
     1: {
         "title": "Unit 1: Noun Suffixes & State Verbs",
