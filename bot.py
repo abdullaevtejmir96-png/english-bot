@@ -4,12 +4,12 @@ from aiogram.filters import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 
 # ⚠️ ВСТАВЬ СЮДА СВОЙ ТОКЕН ИЗ BOTFATHER
-API_TOKEN = '8957320709:AAFfT_ATxTfom6EVuMW9con9Yvm-1FqwwtM'
+API_TOKEN = 'ВСТАВЬ_СЮДА_СВОЙ_ТОКЕН'
 
-bot = Bot(token=API_TOKEN)
+bot = Bot(8957320709:AAFfT_ATxTfom6EVuMW9con9Yvm-1FqwwtM)
 dp = Dispatcher()
 
-# Обновленная база данных (без домашних заданий)
+# Обновленная база данных
 COURSE_DATA = {
     1: {
         "title": "Unit 1: Noun Suffixes & State Verbs",
@@ -17,29 +17,26 @@ COURSE_DATA = {
             "📚 **UNIT 1: Grammar & Suffixes**\n\n"
             "🟢 **Noun Suffixes (Суффиксы существительных):**\n"
             "На уровне B2 важно не просто знать слова, а уметь их преобразовывать:\n"
-            "• `-ment`: Словесный эквивалент действия/процесса. *develop* (развивать) ➡️ *development* (развитие), *appoint* (назначать) ➡️ *appointment* (встреча/назначение).\n"
-            "• `-tion / -sion`: Часто образует абстрактные понятия от глаголов. *produce* (производить) ➡️ *production* (производство), *decide* (решать) ➡️ *decision* (решение).\n"
-            "• `-ness`: Показывает состояние или качество (от прилагательных). *weak* (слабый) ➡️ *weakness* (слабость), *polite* (вежливый) ➡️ *politeness* (вежливость).\n"
-            "• `-ity`: Означает свойство или характеристика. *creative* (творческий) ➡️ *creativity* (творчество/креативность).\n\n"
+            "• `-ment`: Словесный эквивалент действия/процесса. *develop* (развивать) ➡️ *development* (развитие).\n"
+            "• `-tion / -sion`: Абстрактные понятия от глаголов. *produce* ➡️ *production*, *decide* ➡️ *decision*.\n"
+            "• `-ness`: Состояние или качество. *weak* ➡️ *weakness*, *polite* ➡️ *politeness*.\n"
+            "• `-ity`: Свойство или характеристика. *creative* ➡️ *creativity*.\n\n"
             "🔵 **State Verbs (Глаголы состояния):**\n"
-            "Глаголы, описывающие мыслительные процессы, чувства, владение чем-то, **не живут в временах Continuous** (никаких -ing!).\n"
-            "Основные группы:\n"
+            "Глаголы мысли, чувств, владения **не живут в Continuous** (-ing):\n"
             "1. Thoughts: *know, realize, understand, believe, remember, forget*\n"
             "2. Feelings: *love, hate, prefer, like, depend*\n"
-            "3. Possession: *belong, own, possess, have* (в значении иметь)\n\n"
+            "3. Possession: *belong, own, possess, have* (иметь)\n\n"
             "💡 **Сдвиг значения B1+/B2:**\n"
             "• I *have* a car (У меня есть машина — состояние/Simple).\n"
-            "• I *am having* lunch (Я обедаю — процесс/Continuous).\n"
-            "• I *think* you are right (Я считаю/это мое мнение — Simple).\n"
-            "• Quiet! I *am thinking* about the answer (Я размышляю/процесс в голове — Continuous)."
+            "• I *am having* lunch (Я обедаю — процесс/Continuous)."
         ),
         "use_of_english": (
             "✍️ **UNIT 1: Use of English & Writing**\n\n"
             "**Word Formation Guide:**\n"
-            "В экзаменах (например, FCE/IELTS) вам дается текст с пропусками. На полях стоит базовое слово. Вам нужно понять, какая часть речи пропущена. Если перед пропуском стоит артикль *the* или притяжательное местоимение (*my, his*), а после нет существительного — значит, нужно образовать существительное!\n\n"
+            "Если перед пропуском стоит артикль *the* или местоимение (*my, his*), а после нет существительного — образуем существительное!\n\n"
             "**Writing Part: Formal vs Informal**\n"
-            "На уровне B2 в написании эссе или официальных писем ЗАПРЕЩЕНО использовать сокращения (*don't, can't, I'm*). Вместо этого пишите полностью: *do not, cannot, I am*.\n"
-            "Вместо простых связок используйте продвинутые вводные слова:\n"
+            "В эссе уровня B2 ЗАПРЕЩЕНЫ сокращения (*don't, can't*). Пишите полностью: *do not, cannot*.\n"
+            "Используйте продвинутые вводные слова:\n"
             "• *In addition to this...* (В дополнение к этому)\n"
             "• *Furthermore...* (Более того)\n"
             "• *On the one hand / On the other hand* (С одной стороны / С другой стороны)"
@@ -49,54 +46,51 @@ COURSE_DATA = {
             "📰 **Reading Practice (B2 Text):**\n"
             "«The rapid *development* of artificial intelligence has sparked intense debates among tech experts. Many *believe* that AI will replace millions of jobs, while others argue it will enhance human *creativity*. For now, tech companies are *having* a lot of success implementing new tools, but long-term consequences remain unknown.»\n\n"
             "🔍 **Разбор текста:**\n"
-            "1. *development* — существительное от глагола *develop* с помощью суффикса `-ment`.\n"
-            "2. *believe* — глагол состояния (мысль), стоит в Present Simple.\n"
-            "3. *creativity* — существительное от прилагательного *creative* с помощью суффикса `-ity`.\n"
-            "4. *are having success* — здесь *have* означает не владение, а динамическое действие (добиваются успеха), поэтому Continuous уместен."
+            "1. *development* — существительное с суффиксом `-ment`.\n"
+            "2. *believe* — глагол состояния, стоит в Present Simple.\n"
+            "3. *creativity* — существительное от прилагательного *creative*.\n"
+            "4. *are having success* — динамическое действие (добиваются успеха), Continuous уместен."
         ),
         "vocabulary": (
             "🧠 **UNIT 1: Vocabulary & Speaking**\n\n"
             "🔥 **Phrasal Verbs (Topic: Education & Study):**\n"
-            "1. **Bring up** — поднимать вопрос / воспитывать. *Example: She brought up an interesting point during the lesson.*\n"
-            "2. **Fall behind** — отставать (в учебе/графике). *Example: If you miss lessons, you will fall behind the rest of the class.*\n"
-            "3. **Look into** — исследовать, изучать детали. *Example: The police are looking into the cause of the accident.*\n"
-            "4. **Turn out** — оказаться в итоге. *Example: The test turned out to be much easier than I expected.*\n\n"
+            "1. **Bring up** — поднимать вопрос / воспитывать. *Example: She brought up an interesting point.*\n"
+            "2. **Fall behind** — отставать (в учебе/графике). *Example: If you miss lessons, you will fall behind.*\n"
+            "3. **Look into** — исследовать, изучать детали. *Example: The police are looking into the cause.*\n"
+            "4. **Turn out** — оказаться в итоге. *Example: The test turned out to be easy.*\n\n"
             "🗣️ **Speaking Practice Topic:**\n"
-            "Describe an intellectual challenge you faced. You should say:\n"
-            "— what the challenge was\n"
-            "— how you prepared for it\n"
-            "— and explain why it *turned out* to be difficult or easy for you."
+            "Describe an intellectual challenge you faced. You should say what the challenge was and explain why it *turned out* to be difficult or easy for you."
         ),
         "questions": [
             {
                 "q": "1/5: He looked at the painting in absolute ______.\n(Образуй существительное от глагола amaze)",
                 "options": ["amazement", "amazation", "amazeness"],
                 "correct": 0,
-                "expl": "Суффикс -ment используется с глаголом amaze для образования существительного amazement (изумление)."
+                "expl": "Суффикс -ment используется с глаголом amaze для образования существительного amazement."
             },
             {
                 "q": "2/5: Choose the grammatically CORRECT option:",
                 "options": ["I am wanting to buy a new laptop.", "I want to buy a new laptop.", "I am want to buy a new laptop."],
                 "correct": 1,
-                "expl": "Want — глагол состояния (желание), он не употребляется во временах Continuous."
+                "expl": "Want — глагол состояния, он не употребляется во временах Continuous."
             },
             {
                 "q": "3/5: What does the phrasal verb 'fall behind' mean?",
                 "options": ["To drop something on the floor", "To progress slower than others", "To drop out of school entirely"],
                 "correct": 1,
-                "expl": "Fall behind переводится как 'отставать' от группы, графика или прогресса других людей."
+                "expl": "Fall behind переводится как 'отставать' от прогресса других людей."
             },
             {
                 "q": "4/5: 'Why are you smelling the milk?' - Why is Present Continuous used here?",
-                "options": ["Because it is a regular habit.", "Because smell represents an active physical action here.", "It is incorrect, smell cannot be used in Continuous."],
+                "options": ["Because it is a regular habit.", "Because smell represents an active physical action here.", "It is incorrect."],
                 "correct": 1,
-                "expl": "Здесь smell — это physical action (человек намеренно нюхает молоко), а не пассивное ощущение запаха, поэтому Continuous правилен."
+                "expl": "Здесь человек намеренно нюхает молоко (активное действие), поэтому Continuous правилен."
             },
             {
                 "q": "5/5: Regular exercise can improve your overall ______.\n(Образуй слово от прилагательного fit)",
                 "options": ["fittity", "fitment", "fitness"],
                 "correct": 2,
-                "expl": "Суффикс -ness добавляется к прилагательному fit для получения существительного fitness (хорошая физическая форма)."
+                "expl": "Суффикс -ness добавляется к прилагательному fit для получения fitness."
             }
         ]
     },
@@ -105,77 +99,74 @@ COURSE_DATA = {
         "grammar": (
             "📚 **UNIT 2: Grammar & Suffixes**\n\n"
             "🟢 **Adjective Suffixes (Суффиксы прилагательных):**\n"
-            "• `-ive`: Образует прилагательные со значением активного свойства. *act* (действовать) ➡️ *active* (активный), *create* (творить) ➡️ *creative* (творческий).\n"
-            "• `-able / -ible`: Означает возможность выполнения действия или пригодность к чему-то. *rely* (полагаться) ➡️ *reliable* (надежный), *suit* (подходить) ➡️ *suitable* (подходящий).\n"
-            "• `-ful` (наличие качества) vs `-less` (отсутствие качества): *care* (забота) ➡️ *careful* (осторожный) / *careless* (беззаботный/небрежный).\n\n"
+            "• `-ive`: Активное свойство. *act* ➡️ *active*, *create* ➡️ *creative*.\n"
+            "• `-able / -ible`: Пригодность к чему-то. *rely* ➡️ *reliable*, *suit* ➡️ *suitable*.\n"
+            "• `-ful` (наличие) vs `-less` (отсутствие): *care* ➡️ *careful* (осторожный) / *careless* (небрежный).\n\n"
             "🔵 **Narrative Tenses (Прошедшие времена для историй):**\n"
-            "Когда мы рассказываем историю или анекдот, мы красиво комбинируем 3 времени:\n"
             "1. **Past Simple** (Действия по цепочке): *He jumped out of bed, grabbed his keys and ran out.*\n"
-            "2. **Past Continuous** (Длинное фоновое действие/атмосфера): *The wind was blowing, the birds were singing...*\n"
-            "3. **Past Perfect** (Действие-предыстория, которое произошло ДО всей цепочки событий): *When I reached the station, the train had already left.* (Поезд уехал раньше, чем я пришел)."
+            "2. **Past Continuous** (Длинный фон/атмосфера): *The wind was blowing, the rain was pouring...*\n"
+            "3. **Past Perfect** (Предыстория ДО основных событий): *When I reached the station, the train had already left.*"
         ),
         "use_of_english": (
             "✍️ **UNIT 2: Use of English & Writing**\n\n"
-            "**Key Word Transformations (Задания на перефразирование):**\n"
-            "Вам дано предложение и одно опорное слово крупными буквами. С его помощью нужно переписать предложение так, чтобы смысл остался прежним. На это дается от 2 до 5 слов.\n\n"
-            "*Пример:* \n"
+            "**Key Word Transformations:**\n"
             "«We ate dinner before Mark arrived.» (HAD)\n"
-            "➡️ *Ответ:* We **had already eaten** dinner when Mark arrived.\n\n"
+            "➡️ We **had already eaten** dinner when Mark arrived.\n\n"
             "**Writing Practice: Informal Letter / Email**\n"
-            "В отличие от эссе, в неофициальном письме другу сокрщения ИСПОЛЬЗУЮТСЯ (*I'm, can't, don't*). Используйте разговорные связки:\n"
+            "В письме другу сокращения ИСПОЛЬЗУЮТСЯ (*I'm, can't*). Используйте разговорные связки:\n"
             "• *By the way...* (Кстати)\n"
-            "• *Anyway...* (В любом случае / Короче говоря)\n"
+            "• *Anyway...* (Короче говоря)\n"
             "• *Drop me a line soon!* (Чиркани мне пару строк!)"
         ),
         "skills": (
             "📖 **UNIT 2: Reading & Listening**\n\n"
             "📰 **Reading Text (Narrative Style B2):**\n"
             "«It was a dark, stormy night. The rain *was pouring* down outside, and Jessica *was trying* to finish her article. Suddenly, she heard a strange noise from the basement. She remembered that she *had forgotten* to lock the back door. Heart pounding, she walked down the stairs, but it *turned out* to be just her cat.»\n\n"
-            "🔍 **Разбор времен в тексте:**\n"
-            "• *was pouring / was trying* — фоновые процессы в момент истории (Past Continuous).\n"
-            "• *heard / remembered / walked / turned out* — последовательные основные действия (Past Simple).\n"
-            "• *had forgotten* — она забыла закрыть дверь еще до того, как услышала звук (Past Perfect)."
+            "🔍 **Разбор времен:**\n"
+            "• *was pouring / was trying* — фоновые процессы (Past Continuous).\n"
+            "• *heard / remembered* — последовательные действия (Past Simple).\n"
+            "• *had forgotten* — забыла дверь еще до того, как услышала звук (Past Perfect)."
         ),
         "vocabulary": (
             "🧠 **UNIT 2: Vocabulary & Speaking**\n\n"
             "🔥 **B2 Idioms (Идиомы для яркой речи):**\n"
-            "1. **See eye to eye** — полностью соглашаться. *Example: I don't see eye to eye with my boss on this strategy.*\n"
-            "2. **Once in a blue moon** — безумно редко. *Example: My brother lives abroad, so he visits us once in a blue moon.*\n"
-            "3. **Piece of cake** — проще простого (пустяковое дело). *Example: Don't worry about the exam, it's going to be a piece of cake.*\n"
-            "4. **Cost an arm and a leg** — стоить целое состояние. *Example: This new smartphone costs an arm and a leg.*\n\n"
+            "1. **See eye to eye** — полностью соглашаться. *Example: I don't see eye to eye with my boss.*\n"
+            "2. **Once in a blue moon** — безумно редко. *Example: He visits us once in a blue moon.*\n"
+            "3. **Piece of cake** — проще простого. *Example: The exam is going to be a piece of cake.*\n"
+            "4. **Cost an arm and a leg** — стоить целое состояние. *Example: This smartphone costs an arm and a leg.*\n\n"
             "🗣 **Speaking Task:**\n"
-            "Tell a story about a time when you bought something that *cost an arm and a leg*, but later you realized it wasn't *suitable* or *reliable* for you."
+            "Tell a story about a time when you bought something that *cost an arm and a leg*, but later you realized it wasn't *suitable* or *reliable*."
         ),
         "questions": [
             {
                 "q": "1/5: When I arrived at the party, Sarah ______ home.",
                 "options": ["already went", "had already gone", "was already going"],
                 "correct": 1,
-                "expl": "Сара ушла ДО того, как я пришел. Для действия, случившегося раньше другого в прошлом, нужен Past Perfect (had gone)."
+                "expl": "Сара ушла ДО того, как я пришел. Нужен Past Perfect (had gone)."
             },
             {
                 "q": "2/5: He is a very ______ person. You can always trust him.\n(Образуй слово от глагола rely)",
                 "options": ["relyful", "reliable", "reliant"],
                 "correct": 1,
-                "expl": "Суффикс -able образует прилагательное reliable — надежный, тот, на кого можно положиться."
+                "expl": "Суффикс -able образует прилагательное reliable — надежный."
             },
             {
                 "q": "3/5: What does it mean if something 'costs an arm and a leg'?",
                 "options": ["It is dangerous.", "It is extremely expensive.", "It requires physical labor."],
                 "correct": 1,
-                "expl": "Идиома 'costs an arm and a leg' означает, что вещь стоит очень дорого (целое состояние)."
+                "expl": "Идиома 'costs an arm and a leg' означает, что вещь стоит очень дорого."
             },
             {
                 "q": "4/5: While my mother ______ dinner, the lights suddenly went out.",
                 "options": ["cooked", "was cooking", "had cooked"],
                 "correct": 1,
-                "expl": "Готовка ужина — это длительное фоновое действие в прошлом, которое прервалось коротким (went out). Нужен Past Continuous."
+                "expl": "Готовка ужина — длительное фоновое действие. Нужен Past Continuous."
             },
             {
                 "q": "5/5: She was so careless that she made a lot of mistakes. What does 'careless' mean?",
                 "options": ["Very attentive", "Without care / negligent", "Full of worry"],
                 "correct": 1,
-                "expl": "Суффикс -less означает отсутствие качества. Careless — невнимательный, небрежный (без заботы)."
+                "expl": "Суффикс -less означает отсутствие качества. Careless — невнимательный."
             }
         ]
     },
@@ -184,60 +175,57 @@ COURSE_DATA = {
         "grammar": (
             "📚 **UNIT 3: Grammar & Suffixes**\n\n"
             "🟢 **Verb Suffixes (Суффиксы глаголов):**\n"
-            "Служат для создания глаголов от существительных и прилагательных:\n"
-            "• `-ify`: Означает делать каким-то или превращать. *clear* (ясный) ➡️ *clarify* (прояснять/делать ясным), *simple* (простой) ➡️ *simplify* (упрощать).\n"
-            "• `-ize / -ise`: Придавать форму, преобразовывать в состояние. *memory* (память) ➡️ *memorize* (запоминать), *social* (общественный) ➡️ *socialize* (общаться/социализироваться).\n"
-            "• `-en`: Означает становиться или делать более... *short* (короткий) ➡️ *shorten* (укорачивать), *wide* (широкий) ➡️ *widen* (расширять).\n\n"
+            "• `-ify` (делать каким-то): *clear* ➡️ *clarify* (прояснять), *simple* ➡️ *simplify* (упрощать).\n"
+            "• `-ize / -ise` (преобразовывать в состояние): *memory* ➡️ *memorize* (запоминать).\n"
+            "• `-en` (становиться или делать более...): *short* ➡️ *shorten* (укорачивать), *wide* ➡️ *widen* (расширять).\n\n"
             "🔵 **Passive Voice (Пассивный залог уровня B2):**\n"
-            "Мы используем пассив, когда совершающий действие объект нам неизвестен, неважен, или мы хотим звучать официально. Формула: **BE (в нужном времени) + глагол в 3-й форме (V3)**.\n\n"
-            "Продвинутые формы пассива для B2:\n"
-            "• **Continuous Passive** (действие происходит прямо сейчас): *The car is being repaired right now.* (Машину сейчас ремонтируют).\n"
-            "• **Perfect Passive** (действие уже завершилось к текущему моменту): *The report has been sent.* (Отчет уже отправлен).\n"
-            "• **Modal Passive** (с модальными глаголами): *The rules must be followed.* (Правила необходимо соблюдать)."
+            "Формула: **BE + глагол в 3-й форме (V3)**.\n"
+            "• **Continuous Passive** (прямо сейчас): *The car is being repaired right now.*\n"
+            "• **Perfect Passive** (уже завершилось): *The report has been sent.*\n"
+            "• **Modal Passive** (с модальными глаголами): *The rules must be followed.*"
         ),
         "use_of_english": (
             "✍️ **UNIT 3: Use of English & Writing**\n\n"
             "**Passive Sentence Transformation:**\n"
-            "На экзаменах часто просят переделать активный залог в пассивный, сохраняя видовременную форму.\n"
-            "• *Active:* They are examining the project. (Present Continuous)\n"
-            "• *Passive:* The project **is being examined**. (Present Continuous Passive)\n\n"
-            "• *Active:* They have canceled the match. (Present Perfect)\n"
-            "• *Passive:* The match **has been canceled**. (Present Perfect Passive)\n\n"
+            "• *Active:* They are examining the project. \n"
+            "• *Passive:* The project **is being examined**.\n\n"
+            "• *Active:* They have canceled the match. \n"
+            "• *Passive:* The match **has been canceled**.\n\n"
             "**Writing Tip: Formal Reports**\n"
-            "В официальных отчетах пассивный залог является основным стилем повествования, так как он убирает личные местоимения *I, We*. Вместо «We discovered that...» пишите: «It was discovered that...»."
+            "В отчетах пассив убирает личные местоимения. Вместо «We discovered that...» пишите: «It was discovered that...»."
         ),
         "skills": (
             "📖 **UNIT 3: Reading & Listening**\n\n"
             "📰 **Reading Text (Official News B2):**\n"
             "«New security measures *have been introduced* at the airport today. Passports *are being checked* by automated scanners to *shorten* waiting lines. Officials state that all luggage *must be scanned* before boarding. These changes *were finalized* last week after a brief review.»\n\n"
             "🔍 **Анализ пассива:**\n"
-            "• *have been introduced* — Present Perfect Passive (уже ввели, важен результат).\n"
-            "• *are being checked* — Present Continuous Passive (прямо сейчас проверяются в данный период времени).\n"
-            "• *must be scanned* — Modal Passive (должны быть отсканированы).\n"
-            "• *were finalized* — Past Simple Passive (были утверждены на прошлой неделе)."
+            "• *have been introduced* — Present Perfect Passive.\n"
+            "• *are being checked* — Present Continuous Passive.\n"
+            "• *must be scanned* — Modal Passive.\n"
+            "• *were finalized* — Past Simple Passive."
         ),
         "vocabulary": (
             "🧠 **UNIT 3: Vocabulary & Speaking**\n\n"
             "🔥 **Advanced Collocations (Устойчивые словосочетания B2):**\n"
-            "1. **Make an effort** — приложить усилия. *Example: You need to make an effort if you want to pass B2.*\n"
-            "2. **Take advantage of** — воспользоваться моментом/преимуществом. *Example: You should take advantage of this free course.*\n"
-            "3. **Do your best** — сделать всё возможное. *Example: Don't panic, just do your best in the test.*\n"
-            "4. **Change your mind** — передумать, поменять решение. *Example: I was going to stay home, but I changed my mind.*\n\n"
+            "1. **Make an effort** — приложить усилия. *Example: You need to make an effort.*\n"
+            "2. **Take advantage of** — воспользоваться преимуществом. *Example: Take advantage of this course.*\n"
+            "3. **Do your best** — сделать всё возможное. *Example: Just do your best in the test.*\n"
+            "4. **Change your mind** — передумать. *Example: I changed my mind.*\n\n"
             "🗣 **Speaking Practice:**\n"
-            "Talk about an important decision you made. Did you *change your mind* later? Did you *take advantage of* someone's advice? Speak for 1.5 minutes."
+            "Talk about an important decision you made. Did you *change your mind* later?"
         ),
         "questions": [
             {
                 "q": "1/5: Active: 'They are building a school.' -> Passive:",
                 "options": ["A school is built.", "A school is being built.", "A school has been built."],
                 "correct": 1,
-                "expl": "В оригинале Present Continuous (are building), значит в пассиве будет форма 'is/are being + V3'."
+                "expl": "В оригинале Present Continuous, значит в пассиве будет 'is/are being + V3'."
             },
             {
                 "q": "2/5: Could you please ______ your answer? It's not quite clear.\n(Образуй глагол от прилагательного clear)",
                 "options": ["clearize", "clearen", "clarify"],
                 "correct": 2,
-                "expl": "Суффикс -ify используется для образования глагола clarify — прояснить, внести ясность."
+                "expl": "Суффикс -ify используется для образования глагола clarify — прояснить."
             },
             {
                 "q": "3/5: All homework assignments ______ before Friday.",
@@ -249,27 +237,27 @@ COURSE_DATA = {
                 "q": "4/5: I was going to move out, but at the last moment I ______ my mind.",
                 "options": ["made", "took", "changed"],
                 "correct": 2,
-                "expl": "Устойчивое выражение 'change your mind' переводится как 'передумать, изменить решение'."
+                "expl": "Устойчивое выражение 'change your mind' переводится как 'передумать'."
             },
             {
-                "q": "5/5: We need to ______ the old wooden door so the car can pass.\n(Образуй глагол от прилагательного wide - широкий)",
+                "q": "5/5: We need to ______ the old wooden door so the car can pass.\n(Образуй глагол от прилагательного wide)",
                 "options": ["widen", "widify", "wideize"],
                 "correct": 0,
-                "expl": "Суффикс -en добавляется к некоторым прилагательным для значения 'делать шире/больше' -> widen (расширять)."
+                "expl": "Суффикс -en добавляется для значения 'делать шире' -> widen."
             }
         ]
     }
 }
 
 # Сессии пользователей
-user_units = {}         # Текущий юнит юзера {user_id: unit_number}
-user_test_progress = {} # На каком вопросе теста сейчас юзер {user_id: question_index}
-user_test_score = {}    # Счет правильных ответов {user_id: correct_count}
+user_units = {}         
+user_test_progress = {} 
+user_test_score = {}    
 
 def get_user_unit(user_id):
     return user_units.get(user_id, 1)
 
-# Главное меню (КНОПКА ДЗ ПОЛНОСТЬЮ УБРАНА)
+# Главное меню
 main_menu = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text="📖 Изучать Теорию (Grammar & Suffixes)")],
@@ -289,7 +277,7 @@ async def send_welcome(message: types.Message):
     await message.answer(
         f"Hi {message.from_user.first_name}! 👋\n"
         "Добро пожаловать в мега-курс английского языка уровня B1+/B2.\n\n"
-        "Меню обновлено, лишние кнопки убраны. Приятного обучения!\n\n"
+        "Все ошибки исправлены, кнопки настроены! Приятного обучения.\n\n"
         "Текущий класс: **Unit 1**.",
         reply_markup=main_menu
     )
@@ -312,15 +300,6 @@ async def process_unit_change(callback_query: types.CallbackQuery):
     user_test_progress[user_id] = -1 
     
     await bot.answer_callback_query(callback_query.id)
-    
-    # Кнопка перехода на следующий юнит в конце теста
-    if unit_num < 3:
-        next_unit_btn = InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(text=f"Открыть Unit {unit_num+1} 🔓", callback_data=f"set_unit_{unit_num+1}")]
-        ])
-    else:
-        next_unit_btn = None
-
     await bot.send_message(
         user_id,
         f"✅ Успешно переключено на **{COURSE_DATA[unit_num]['title']}**!\n"
@@ -382,8 +361,6 @@ async def send_next_question(user_id, chat_id):
         await bot.send_message(chat_id, f"❓ **Вопрос {q_data['q']}**", reply_markup=keyboard, parse_mode="Markdown")
     else:
         score = user_test_score[user_id]
-        
-        # Вместо ДЗ теперь предлагаем сразу открыть следующий юнит, если он есть
         if unit < 3:
             keyboard = InlineKeyboardMarkup(inline_keyboard=[
                 [InlineKeyboardButton(text=f"Открыть Unit {unit+1} 🔓", callback_data=f"set_unit_{unit+1}")]
@@ -445,7 +422,7 @@ async def process_navigation(callback_query: types.CallbackQuery):
         await start_test_command(callback_query.message)
 
 async def main():
-    print("Бот успешно обновлен на Railway (версия без ДЗ)!")
+    print("Бот успешно запущен!")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
